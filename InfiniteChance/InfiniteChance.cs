@@ -16,8 +16,8 @@ namespace TwylaInfiniteChance
             On.RoR2.ShrineChanceBehavior.Awake += (orig, self) =>
             {
                 orig(self);
-                self.maxPurchaseCount = 9000;
-                                Harmony.AccessTools.Field(Harmony.AccessTools.TypeByName("RoR2.ShrineChanceBehavior"), "costMultiplierPerPurchase").SetValue(self, 1.1f);
+                self.maxPurchaseCount = 9000
+                Harmony.AccessTools.Field(Harmony.AccessTools.TypeByName("RoR2.ShrineChanceBehavior"), "costMultiplierPerPurchase").SetValue(self, 1.1f);
             };
         }
     }
