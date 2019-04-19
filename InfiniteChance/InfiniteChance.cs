@@ -20,11 +20,11 @@ namespace TwylaInfiniteChance
             return 0f;
         }
 
+        float CostMult => CostMulti(Config.Wrap("Money", "CostMultiplier", "By how much the cost will be multiplied after each purchase (if this doesn't work try using a comma instead of a dot)", "1.1").Value);
 
         private static ConfigWrapper<int> maxPurchase { get; set; }
         public static int maxPurchases { get { return NoMoreLimits.maxPurchase.Value; } protected set { NoMoreLimits.maxPurchase.Value = value; } }
 
-        float CostMult => CostMulti(Config.Wrap("Money", "CostMultiplier", "By how much the cost will be multiplied after each purchase", "1.1").Value);
 
         public void Awake()
         {
