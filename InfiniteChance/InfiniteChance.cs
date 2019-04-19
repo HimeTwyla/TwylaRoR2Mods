@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 namespace TwylaInfiniteChance
 {
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.Twyla.InfiniteChance", "InfiniteChance", "1.2.0")]
+    [BepInPlugin("com.Twyla.InfiniteChance", "InfiniteChance", "1.2.1")]
     public class NoMoreLimits : BaseUnityPlugin
     {
         public float CostMulti(string configline)
