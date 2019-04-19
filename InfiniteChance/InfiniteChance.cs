@@ -11,7 +11,7 @@ namespace TwylaInfiniteChance
     [BepInPlugin("com.Twyla.InfiniteChance", "InfiniteChance", "1.2.0")]
     public class NoMoreLimits : BaseUnityPlugin
     {
-        public float CostMultiplier(string configline)
+        public float CostMulti(string configline)
         {
             if (float.TryParse(configline, out float x))
             {
@@ -24,11 +24,11 @@ namespace TwylaInfiniteChance
         private static ConfigWrapper<int> maxPurchase { get; set; }
         public static int maxPurchases { get { return NoMoreLimits.maxPurchase.Value; } protected set { NoMoreLimits.maxPurchase.Value = value; } }
 
-        float CostMult => CostMultiplier(Config.Wrap("Money", "CostMultiplier", "By how much the cost will be multiplied after each purchase", "1.1").Value);
+        float CostMult => CostMulti(Config.Wrap("Money", "CostMultiplier", "By how much the cost will be multiplied after each purchase", "1.1").Value);
 
         public void Awake()
         {
-            NoMoreLimits.maxPurchase = base.Config.Wrap<int>("Gamble", "Max Uses", "How many times a shrine of chance will spawn items before going bye-bye.", 9000);
+            NoMoreLimits.maxPurchase = base.Config.Wrap<int>("Gamble", "Max Uses", "How many items you'll get before you start regretting your gambling addiction.", 9000);
             Chat.AddMessage("Infinite Chance loaded. Good luck you sick bastards!");
             On.RoR2.ShrineChanceBehavior.Awake += (orig, self) =>
             {
