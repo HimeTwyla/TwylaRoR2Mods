@@ -45,12 +45,6 @@ namespace TwylaInfiniteChance
                 Chat.AddMessage(self.maxPurchaseCount.ToString());
             };
 
-            On.EntityStates.Huntress.ArrowRain.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                EntityStates.Huntress.ArrowRain.maxDuration = 200f;
-                Chat.AddMessage("Big ass rain of arrows inc");
-            };
             IL.RoR2.ShrineChanceBehavior.AddShrineStack += il =>
             {
                 var c = new ILCursor(il).Goto(144);
