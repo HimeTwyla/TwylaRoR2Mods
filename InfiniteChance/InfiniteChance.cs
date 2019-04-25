@@ -47,7 +47,6 @@ namespace TwylaInfiniteChance
                 orig(self);
                 self.maxPurchaseCount = maxPurchases;
                 Harmony.AccessTools.Field(Harmony.AccessTools.TypeByName("RoR2.ShrineChanceBehavior"), "costMultiplierPerPurchase").SetValue(self, CostMult);
-                Chat.AddMessage(self.maxPurchaseCount.ToString());
             };
 
             IL.RoR2.ShrineChanceBehavior.AddShrineStack += il =>
