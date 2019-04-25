@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using BepInEx;
 using RoR2;
 using BepInEx.Configuration;
@@ -19,11 +20,15 @@ namespace TwylaInfiniteChance
 
         public float CostMulti(string configline)
         {
-            if (float.TryParse(configline, out float x))
+            try
             {
+                float x = float.Parse(configline, CultureInfo.InvariantCulture);
                 return x;
             }
-            return 0f;
+            catch (FormatException)
+            {
+                return 0.0f;
+            }
         }
 
         private static ConfigWrapper<int> maxPurchase { get; set; }
