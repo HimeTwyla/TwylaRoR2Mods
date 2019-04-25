@@ -12,7 +12,7 @@ namespace TwylaInfiniteChance
 {
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.Twyla.InfiniteChance", "InfiniteChance", "1.3.0")]
+    [BepInPlugin("com.Twyla.InfiniteChance", "InfiniteChance", "1.3.1")]
 
 
     public class NoMoreLimits : BaseUnityPlugin
