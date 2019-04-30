@@ -7,12 +7,13 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using System.Collections;
 
 namespace TwylaInfiniteChance
 {
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.Twyla.InfiniteChance", "InfiniteChance", "1.3.1")]
+    [BepInPlugin("com.Twyla.InfiniteChance", "InfiniteChance", "1.3.2")]
 
 
     public class NoMoreLimits : BaseUnityPlugin
@@ -38,9 +39,9 @@ namespace TwylaInfiniteChance
 
         public void Awake()
         {
-            
+
             float CostMult = CostMulti(Config.Wrap("Money", "CostMultiplier", "By how much the cost will be multiplied after each purchase", "1.1").Value);
-            NoMoreLimits.maxPurchase = base.Config.Wrap<int>("Gamble", "Max Uses", "How many items you'll get before you start regretting your gambling addiction.", 9000);                     
+            NoMoreLimits.maxPurchase = base.Config.Wrap<int>("Gamble", "Max Uses", "How many items you'll get before you start regretting your gambling addiction.", 9000);
             Chat.AddMessage("Infinite Chance loaded. Good luck you sick bastards!");
             On.RoR2.ShrineChanceBehavior.Awake += (orig, self) =>
             {
@@ -49,14 +50,20 @@ namespace TwylaInfiniteChance
                 Harmony.AccessTools.Field(Harmony.AccessTools.TypeByName("RoR2.ShrineChanceBehavior"), "costMultiplierPerPurchase").SetValue(self, CostMult);
             };
 
-            IL.RoR2.ShrineChanceBehavior.AddShrineStack += il =>
+            On.RoR2.ShrineChanceBehavior.AddShrineStack += (orig, self, interactor) =>
             {
-                var c = new ILCursor(il);
+                orig(self, interactor);
 
-                c.GotoNext(x => x.MatchLdcR4(2f));
-                c.Remove();
-                c.Emit(OpCodes.Ldc_R4, 0f);
+                StartCoroutine(RemoveCooldown(self));
+
             };
+
+            IEnumerator RemoveCooldown(ShrineChanceBehavior instance)
+            {
+                yield return new WaitForSeconds(0.1f);
+                instance.SetFieldValue("refreshTimer", 0f);
+                //Harmony.AccessTools.Field(Harmony.AccessTools.TypeByName("RoR2.ShrinceChanceBehavior"), "refreshTimer").SetValue(instance, 0f);
+            }
         }
     }
 }
