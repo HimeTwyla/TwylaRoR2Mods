@@ -61,9 +61,7 @@ namespace TwylaInfiniteChance
             IEnumerator RemoveCooldown(ShrineChanceBehavior instance)
             {
                 yield return new WaitForSeconds(0.1f);
-                instance.SetFieldValue("refreshTimer", 0f);
-                //Harmony.AccessTools.Field(Harmony.AccessTools.TypeByName("RoR2.ShrinceChanceBehavior"), "refreshTimer").SetValue(instance, 0f);
-            }
+                instance.SetFieldValue("refreshTimer", 0f);            }
         }
     }
 }
