@@ -54,14 +54,8 @@ namespace TwylaInfiniteChance
             {
                 orig(self, interactor);
 
-                StartCoroutine(RemoveCooldown(self));
-
+                self.SetFieldValue("refreshTimer", 0f);
             };
-
-            IEnumerator RemoveCooldown(ShrineChanceBehavior instance)
-            {
-                yield return new WaitForSeconds(0.1f);
-                instance.SetFieldValue("refreshTimer", 0f);            }
         }
     }
 }
