@@ -51,7 +51,9 @@ namespace TwylaInfiniteChance
 
             IL.RoR2.ShrineChanceBehavior.AddShrineStack += il =>
             {
-                var c = new ILCursor(il).Goto(144);
+                var c = new ILCursor(il);
+
+                c.GotoNext(x => x.MatchLdcR4(2f));
                 c.Remove();
                 c.Emit(OpCodes.Ldc_R4, 0f);
             };
