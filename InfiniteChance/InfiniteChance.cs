@@ -63,7 +63,6 @@ namespace InfiniteChance2
                         {
 
                             sendChatMessage(fail + " fails in a row , guaranteed green " + FailWeight);
-                            FailWeight = (FailWeight * 0.5f);
                             self.equipmentWeight = 0f;
                             self.tier1Weight = 0f;
                             self.tier2Weight = 0.8f;
@@ -72,7 +71,7 @@ namespace InfiniteChance2
                         else if (fail >= GuaranteedRed)
                         {
                             sendChatMessage(fail + " fails in a row , guaranteed red " + FailWeight);
-                            FailWeight = (FailWeight * 0f);
+                            FailWeight = 1.01f;
                             self.equipmentWeight = 0f;
                             self.tier1Weight = 0f;
                             self.tier2Weight = 0f;
