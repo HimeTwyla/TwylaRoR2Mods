@@ -59,26 +59,27 @@ namespace InfiniteChance2
                         FailWeight = (FailWeight * Failmult);
                         ++fail;
                         sendChatMessage("Fail " + fail + " weight " + FailWeight);
-                        if (fail >= GuaranteedRed) // this just doesn't fucking work
+                        if (fail >= GuaranteedGreen && fail < GuaranteedRed)
                         {
-                            if (fail >= GuaranteedGreen && fail < GuaranteedRed)
-                            {
-                                sendChatMessage(fail + " fails in a row , guaranteed green " + FailWeight);
-                                FailWeight = (FailWeight * 0.5f);
-                                self.equipmentWeight = 0f;
-                                self.tier1Weight = 0f;
-                                self.tier2Weight = 0.8f;
-                                self.tier3Weight = 0.2f;
-                            }
+
+                            sendChatMessage(fail + " fails in a row , guaranteed green " + FailWeight);
+                            FailWeight = (FailWeight * 0.5f);
+                            self.equipmentWeight = 0f;
+                            self.tier1Weight = 0f;
+                            self.tier2Weight = 0.8f;
+                            self.tier3Weight = 0.2f;
+                        }
+                        else if (fail >= GuaranteedRed)
+                        {
                             sendChatMessage(fail + " fails in a row , guaranteed red " + FailWeight);
                             FailWeight = (FailWeight * 0f);
                             self.equipmentWeight = 0f;
                             self.tier1Weight = 0f;
                             self.tier2Weight = 0f;
-                            self.tier3Weight = 1f; // None of it does
+                            self.tier3Weight = 1f;
                         }
                     }
-                    if (succ != success)
+                    else if (succ != success)
                     {
                         ++success;
                         FailWeight = RNGWeight;
