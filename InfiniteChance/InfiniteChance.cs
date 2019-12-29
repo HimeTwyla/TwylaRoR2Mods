@@ -66,7 +66,7 @@ namespace InfiniteChance2
                             self.equipmentWeight = 0f;
                             self.tier1Weight = 0f;
                             self.tier2Weight = 0.8f;
-                            self.tier3Weight = 0.2f;
+                            self.tier3Weight = 0.21f;
                         }
                         else if (fail >= GuaranteedRed)
                         {
@@ -75,7 +75,7 @@ namespace InfiniteChance2
                             self.equipmentWeight = 0f;
                             self.tier1Weight = 0f;
                             self.tier2Weight = 0f;
-                            self.tier3Weight = 1f;
+                            self.tier3Weight = 1.01f;
                         }
                     }
                     else if (succ != success)
@@ -83,6 +83,10 @@ namespace InfiniteChance2
                         ++success;
                         FailWeight = RNGWeight;
                         fail = 0;
+                        self.equipmentWeight = 0.2f;
+                        self.tier1Weight = 0.6f;
+                        self.tier2Weight = 0.2f;
+                        self.tier3Weight = 0.01f;
                         sendChatMessage("success " + "counter = " + success + "number of successes" + succ + "resetting fail weight" + FailWeight);
 
                     }
