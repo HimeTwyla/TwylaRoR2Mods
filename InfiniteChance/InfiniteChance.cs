@@ -13,7 +13,7 @@ using R2API.Utils;
 namespace InfiniteChance2
 {
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.Twyla.InfiniteChance", "InfiniteChance", "2.0.0")]
+    [BepInPlugin("com.Twyla.InfiniteChance", "InfiniteChance", "2.0.1")]
     public class InfiniteChance : BaseUnityPlugin
     {
         public ConfigEntry<bool> DisableCooldown { get; set; }
@@ -58,24 +58,20 @@ namespace InfiniteChance2
                     {
                         FailWeight = (FailWeight * Failmult);
                         ++fail;
-                        sendChatMessage("Fail " + fail + " weight " + FailWeight);
                         if (fail >= GuaranteedGreen && fail < GuaranteedRed)
                         {
 
-                            sendChatMessage(fail + " fails in a row , guaranteed green " + FailWeight);
                             self.equipmentWeight = 0f;
                             self.tier1Weight = 0f;
-                            self.tier2Weight = 0.8f;
-                            self.tier3Weight = 0.21f;
+                            self.tier2Weight = 9.2f;
+                            self.tier3Weight = 3f;
                         }
                         else if (fail >= GuaranteedRed)
                         {
-                            sendChatMessage(fail + " fails in a row , guaranteed red " + FailWeight);
-                            FailWeight = 1.01f;
                             self.equipmentWeight = 0f;
                             self.tier1Weight = 0f;
                             self.tier2Weight = 0f;
-                            self.tier3Weight = 1.01f;
+                            self.tier3Weight = 12.2f;
                         }
                     }
                     else if (succ != success)
@@ -83,12 +79,10 @@ namespace InfiniteChance2
                         ++success;
                         FailWeight = RNGWeight;
                         fail = 0;
-                        self.equipmentWeight = 0.2f;
-                        self.tier1Weight = 0.6f;
-                        self.tier2Weight = 0.2f;
-                        self.tier3Weight = 0.01f;
-                        sendChatMessage("success " + "counter = " + success + "number of successes" + succ + "resetting fail weight" + FailWeight);
-
+                        self.equipmentWeight = 2f;
+                        self.tier1Weight = 8f;
+                        self.tier2Weight = 2f;
+                        self.tier3Weight = 0.2f;
                     }
                 }
                 bool CD = DisableCooldown.Value;
@@ -103,13 +97,6 @@ namespace InfiniteChance2
                     self.SetFieldValue("refreshTimer", 2f);
                 }
             };
-        }
-        private void sendChatMessage(string message)
-        {
-            Chat.SendBroadcastChat(new Chat.SimpleChatMessage
-            {
-                baseToken = message
-            });
         }
     }
 }
